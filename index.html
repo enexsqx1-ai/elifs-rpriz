@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Sana Özel Sürpriz 💝</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+
+        .pink-bg {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffdde1 100%);
+        }
+
+        .black-bg {
+            background: #000 !important;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.7;
+            }
+
+            90% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Welcome Screen */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: all 0.8s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+        }
+
+        .welcome-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow:
+                0 0 10px rgba(255, 105, 180, 0.8),
+                0 0 20px rgba(255, 105, 180, 0.6),
+                0 0 30px rgba(255, 105, 180, 0.4),
+                0 0 40px rgba(255, 105, 180, 0.2),
+                3px 3px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px rgba(255, 105, 180, 0.8),
+                    0 0 20px rgba(255, 105, 180, 0.6),
+                    0 0 30px rgba(255, 105, 180, 0.4);
+            }
+
+            to {
+                text-shadow:
+                    0 0 20px rgba(255, 105, 180, 1),
+                    0 0 30px rgba(255, 105, 180, 0.8),
+                    0 0 40px rgba(255, 105, 180, 0.6),
+                    0 0 50px rgba(255, 105, 180, 0.4);
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffb3c6);
+            color: white;
+            box-shadow:
+                0 10px 30px rgba(255, 107, 157, 0.4),
+                0 0 0 0 rgba(255, 107, 157, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow:
+                0 15px 40px rgba(255, 107, 157, 0.5),
+                0 0 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Gift Counter */
+        .gift-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+            padding: 15px 25px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gift-counter span {
+            font-size: 1.5rem;
+        }
+
+        /* Gift Box */
+        .gift-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .gift-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-base {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6b9d, #e91e63);
+            border-radius: 10px;
+            box-shadow:
+                0 20px 40px rgba(233, 30, 99, 0.4),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gift-ribbon-v {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 150px;
+            background: linear-gradient(90deg, #ffd700, #ffec8b, #ffd700);
+            bottom: 0;
+        }
+
+        .gift-lid {
+            position: absolute;
+            top: 0;
+            width: 220px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff8fab, #ff6b9d);
+            border-radius: 10px;
+            left: -10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .gift-ribbon-h {
+            position: absolute;
+            top: 10px;
+            width: 220px;
+            height: 30px;
+            background: linear-gradient(90deg, #ffd700, #ffec8b, #ffd700);
+            left: -10px;
+        }
+
+        .gift-bow {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+        }
+
+        .gift-text {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+
+        /* Gift Opening Animation */
+        .gift-box.opening .gift-lid {
+            animation: openLid 1s ease forwards;
+        }
+
+        @keyframes openLid {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-100px) rotate(-30deg);
+            }
+
+            100% {
+                transform: translateY(-150px) rotate(-45deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .gift-box.opening .gift-bow {
+            animation: flyAway 1s ease forwards;
+        }
+
+        @keyframes flyAway {
+            0% {
+                transform: translateX(-50%) translateY(0) rotate(0);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(-200px) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Light Burst Effect */
+        .light-burst {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 215, 0, 0.8) 30%, rgba(255, 107, 157, 0.5) 60%, transparent 70%);
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .light-burst.active {
+            animation: burst 1.5s ease-out forwards;
+        }
+
+        @keyframes burst {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                width: 200vw;
+                height: 200vw;
+                opacity: 0;
+            }
+        }
+
+        /* Paper/Card */
+        .paper {
+            background: linear-gradient(135deg, #fff9f9, #fff0f5);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 8px rgba(255, 107, 157, 0.3),
+                0 0 0 12px rgba(255, 107, 157, 0.2);
+            text-align: center;
+            position: relative;
+            animation: paperAppear 0.8s ease;
+        }
+
+        @keyframes paperAppear {
+            0% {
+                transform: scale(0) rotate(10deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(-3deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .paper-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .paper-content p {
+            margin-bottom: 15px;
+        }
+
+        .paper::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+        }
+
+        /* Ring Emoji */
+        .ring-container {
+            font-size: 150px;
+            animation: ringPulse 2s ease-in-out infinite, ringAppear 1s ease;
+            position: relative;
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes ringAppear {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .ring-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.5);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .ring-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Black Screen Text */
+        .black-screen-text {
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInText 2s ease;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8);
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Explosion Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 30px;
+            z-index: 60;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ffd700 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 55;
+        }
+
+        /* Question Screen */
+        .question-text {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            text-shadow:
+                0 0 10px rgba(255, 105, 180, 0.8),
+                0 0 20px rgba(255, 105, 180, 0.6),
+                3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeInText 1s ease;
+            max-width: 600px;
+        }
+
+        /* Scrollbar */
+        .paper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .paper::-webkit-scrollbar-track {
+            background: #fff0f5;
+            border-radius: 10px;
+        }
+
+        .paper::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+                padding: 0 15px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .paper {
+                margin: 15px;
+                padding: 20px;
+                max-width: 95%;
+            }
+
+            .paper-content {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .paper-content p {
+                margin-bottom: 10px;
+            }
+
+            .ring-container {
+                font-size: 120px;
+            }
+
+            .gift-counter {
+                top: 15px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 1rem;
+            }
+
+            .gift-box {
+                width: 150px;
+                height: 150px;
+            }
+
+            .gift-base {
+                width: 150px;
+                height: 110px;
+            }
+
+            .gift-lid {
+                width: 170px;
+                height: 40px;
+                left: -10px;
+            }
+
+            .gift-ribbon-h {
+                width: 170px;
+                height: 25px;
+            }
+
+            .gift-ribbon-v {
+                width: 25px;
+                height: 110px;
+            }
+
+            .gift-bow {
+                font-size: 45px;
+                top: -25px;
+            }
+
+            .gift-text {
+                font-size: 1.2rem;
+                bottom: 45px;
+            }
+
+            .question-text {
+                font-size: 1.4rem;
+                padding: 15px;
+            }
+
+            .black-screen-text {
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .welcome-title {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .paper {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .paper-content {
+                font-size: 0.85rem;
+            }
+
+            .ring-container {
+                font-size: 100px;
+            }
+
+            .gift-box {
+                width: 120px;
+                height: 120px;
+            }
+
+            .gift-base {
+                width: 120px;
+                height: 90px;
+            }
+
+            .gift-lid {
+                width: 140px;
+                height: 35px;
+            }
+
+            .gift-ribbon-h {
+                width: 140px;
+            }
+
+            .gift-ribbon-v {
+                height: 90px;
+            }
+
+            .gift-bow {
+                font-size: 35px;
+            }
+
+            .gift-text {
+                font-size: 1rem;
+                bottom: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body class="pink-bg">
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Light Burst Effect -->
+    <div class="light-burst" id="lightBurst"></div>
+
+    <!-- Gift Counter -->
+    <div class="gift-counter" id="giftCounter" style="display: none;">
+        🎁 Kalan Hediye: <span id="counterNumber">4</span>
+    </div>
+
+    <!-- Screen 1: Welcome -->
+    <div class="screen" id="screen1">
+        <h1 class="welcome-title">HOŞ GELDİN DÜNYALAR GÜZELİ<br>EELLİİFF 💖</h1>
+        <button class="btn" onclick="goToScreen2()">Devam Et 💝</button>
+    </div>
+
+    <!-- Screen 2: Gift Box -->
+    <div class="screen hidden" id="screen2">
+        <div class="gift-container">
+            <div class="gift-box" id="giftBox" onclick="openGift()">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-lid">
+                    <div class="gift-ribbon-h"></div>
+                </div>
+                <div class="gift-base">
+                    <div class="gift-ribbon-v"></div>
+                </div>
+                <span class="gift-text">TIKLA</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 3: First Paper -->
+    <div class="screen hidden" id="screen3">
+        <div class="paper">
+            <div class="paper-content">
+                <p>SANA 3 TANE SÜRPRİZ HAZIRLADIM 🎁</p>
+                <p>SENİN İLE İLGİLİ BÖYLE ŞEYLER YAPMAK ACAYİP HOŞUMA GİDİYOR</p>
+                <p>DAHA DOĞRUSU SEN ÇOK HOŞUMA GİDİYORSUN 💕</p>
+                <p>SENİ NE KADAR ÇOK SEVDİĞİMİ AÇIKLARDIM AMA YAZILIM OKADAR GELİŞMEDİ OKADAR KELİME YAZAMIYORUM 😅</p>
+                <p>SENİ GERÇEKTEN ÇOK SEVİYORUM YA</p>
+                <p>birşansversen 😓</p>
+                <p style="margin-top: 20px; font-weight: 600; color: #ff6b9d;">DİĞER HEDİYENİ GÖRMEK İÇİN ALTTAKİ BUTONA
+                    BAS 💞</p>
+            </div>
+            <button class="btn" onclick="nextGift1()">Diğer Hediyeye Geç 🎁</button>
+        </div>
+    </div>
+
+    <!-- Screen 4: Second Question -->
+    <div class="screen hidden" id="screen4">
+        <div class="gift-container">
+            <p class="question-text">ŞİMDİ HAYATTA EN ÇOK İSTEDİĞİM ŞEYİ GÖRMEK İSTER MİSİN? 💭</p>
+            <button class="btn" onclick="showBlackScreen()">Gör 👀</button>
+        </div>
+    </div>
+
+    <!-- Screen 5: Black Screen -->
+    <div class="screen hidden" id="screen5">
+        <p class="black-screen-text" id="blackText"></p>
+        <button class="btn" id="continueBtn" style="display: none; margin-top: 30px;" onclick="showRing()">Devam Et
+            💍</button>
+    </div>
+
+    <!-- Screen 6: Final Gift Box -->
+    <div class="screen hidden" id="screen6">
+        <div class="gift-container">
+            <div class="gift-box" id="giftBox2" onclick="openFinalGift()">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-lid">
+                    <div class="gift-ribbon-h"></div>
+                </div>
+                <div class="gift-base">
+                    <div class="gift-ribbon-v"></div>
+                </div>
+                <span class="gift-text">TIKLA</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 7: Ring -->
+    <div class="screen hidden" id="screen7">
+        <div class="ring-container">
+            💍
+            <button class="ring-btn" onclick="showFinalPaper()">Son için tıkla</button>
+        </div>
+    </div>
+
+    <!-- Screen 8: Final Paper -->
+    <div class="screen hidden" id="screen8">
+        <div class="paper">
+            <div class="paper-content">
+                <p>HEDİYENİN SONUNA GELDİK 🎁💖</p>
+                <p>SENİN O MÜKEMMELLİĞİN GÜZELLİĞİN KİŞİLİĞİNİN YANINDA MİNNACIK KALSA BİLE</p>
+                <p>SENİN İÇİN UĞRAŞMAYI SENİN HAKKINDA BİRŞEY YAPMAYI ÇOK SEVİYORUM 💕</p>
+                <p>SENİN İSMİNİ DUYDUĞUMDA BİLE ÇOK SEVİNİYORUM</p>
+                <p>YANİ KISACA SENİN HERŞEYİNİ SENİNLE İLGİLİ HERŞEYİ ÇOK SEVİYORUM ❤️</p>
+                <p>BANA BİRKERE ŞANS VERSEN ÇOK İYİ OLURDA NEYSE 😊</p>
+                <p>İNŞALLAH BEĞENİRSİN</p>
+                <p>SEN BAKARKEN BUNA BEN UYUYOM BÜYÜK İHTİMAL ŞUAN 😴</p>
+                <p>İNŞALLAH RÜYAMDA SENİ GÖRÜYORUMDUR</p>
+                <p>SON 2 GÜN HARİÇ ONDAN ÖNCEKİ GÜNLERDE SENİ GÖRÜYODUM VE O GÜNÜ ÇOK MUTLU GEÇİYORDUM</p>
+                <p>İŞİN İÇİNDE SEN OLUNCA ÇOK MUTLU OLUYORUM</p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: #ff6b9d;">ÇÜNKÜ SENİ ÇOOOOOK SEVİYORUM 💖💕💗💞💘
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let giftCount = 4;
+
+        // Create floating hearts
+        function createHeart() {
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💞', '💘', '❤️', '🩷'][Math.floor(Math.random() * 7)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Create sparkles
+        function createSparkles(x, y, count = 20) {
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                const angle = (Math.PI * 2 * i) / count;
+                const velocity = Math.random() * 200 + 100;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                document.body.appendChild(sparkle);
+
+                sparkle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${dx}px, ${dy}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        }
+
+        // Create explosion particles
+        function createExplosion(x, y) {
+            const emojis = ['✨', '⭐', '💖', '💕', '🎊', '🎉', '💗'];
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 300 + 150;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+
+                document.body.appendChild(particle);
+
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${dx}px, ${dy}px) scale(0) rotate(720deg)`, opacity: 0 }
+                ], {
+                    duration: 1500,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+
+        // Trigger light burst
+        function triggerLightBurst() {
+            const burst = document.getElementById('lightBurst');
+            burst.classList.add('active');
+            setTimeout(() => burst.classList.remove('active'), 1500);
+        }
+
+        // Update counter
+        function updateCounter(newCount) {
+            giftCount = newCount;
+            document.getElementById('counterNumber').textContent = giftCount;
+        }
+
+        // Hide screen
+        function hideScreen(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Show screen
+        function showScreen(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        // Screen transitions
+        function goToScreen2() {
+            hideScreen('screen1');
+            showScreen('screen2');
+            document.getElementById('giftCounter').style.display = 'flex';
+        }
+
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            giftBox.classList.add('opening');
+            triggerLightBurst();
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2, 30);
+
+            setTimeout(() => {
+                updateCounter(3);
+                hideScreen('screen2');
+                showScreen('screen3');
+            }, 1200);
+        }
+
+        function nextGift1() {
+            triggerLightBurst();
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2, 25);
+            updateCounter(2);
+            hideScreen('screen3');
+            showScreen('screen4');
+        }
+
+        function showBlackScreen() {
+            hideScreen('screen4');
+            document.body.classList.remove('pink-bg');
+            document.body.classList.add('black-bg');
+            document.getElementById('heartsContainer').style.display = 'none';
+            document.getElementById('giftCounter').style.display = 'none';
+            showScreen('screen5');
+
+            setTimeout(() => {
+                document.getElementById('blackText').innerHTML = 'UMARIM EN ÇOK İSTEDİĞİM<br>EN ÇOK SEVDİĞİM ŞEYE ULAŞABİLİRİM 💖';
+                updateCounter(1);
+                document.getElementById('giftCounter').style.display = 'flex';
+                document.getElementById('continueBtn').style.display = 'block';
+            }, 5000);
+        }
+
+        function showRing() {
+            document.body.classList.remove('black-bg');
+            document.body.classList.add('pink-bg');
+            document.getElementById('heartsContainer').style.display = 'block';
+            hideScreen('screen5');
+            showScreen('screen6');
+        }
+
+        function openFinalGift() {
+            const giftBox2 = document.getElementById('giftBox2');
+            giftBox2.classList.add('opening');
+            triggerLightBurst();
+
+            // Create massive explosion
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+                    createSparkles(window.innerWidth / 2, window.innerHeight / 2, 40);
+                }, i * 300);
+            }
+
+            setTimeout(() => {
+                hideScreen('screen6');
+                showScreen('screen7');
+                updateCounter(0);
+                document.getElementById('giftCounter').innerHTML = '🎁 Tüm Hediyeler Açıldı! 💖';
+            }, 1200);
+        }
+
+        function showFinalPaper() {
+            triggerLightBurst();
+            createSparkles(window.innerWidth / 2, window.innerHeight / 2, 40);
+            createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+            hideScreen('screen7');
+            showScreen('screen8');
+        }
+
+        // Initial hearts
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+    </script>
+</body>
+
+</html>
